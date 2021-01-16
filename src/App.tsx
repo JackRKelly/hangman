@@ -39,7 +39,14 @@ function App() {
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          handleGuess(guessInput);
+          if (
+            correctGuesses.includes(guessInput) ||
+            incorrectGuesses.includes(guessInput)
+          ) {
+            alert("already guessed character.");
+          } else {
+            handleGuess(guessInput);
+          }
         }}
       >
         <label htmlFor="guess"></label>
@@ -48,7 +55,9 @@ function App() {
           name="guess"
           value={guessInput}
           onChange={(e) => {
-            setGuessInput(e.target.value);
+            if (e.target.value.length <= 1) {
+              setGuessInput(e.target.value);
+            }
           }}
         />
         <button type="submit">Guess</button>
