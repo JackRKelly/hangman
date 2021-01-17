@@ -89,6 +89,7 @@ export const App = () => {
             incorrectGuesses.includes(guessInput)
           ) {
             alert("already guessed character.");
+            setGuessInput("");
           } else {
             handleGuess(guessInput);
             setGuessInput("");
