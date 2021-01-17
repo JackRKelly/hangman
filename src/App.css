@@ -9,3 +9,27 @@
 .word {
   white-space: pre;
 }
+
+.cls-1,
+.cls-2 {
+  fill: none;
+  stroke-linecap: square;
+  stroke-miterlimit: 10;
+}
+.cls-1 {
+  stroke: #231f20;
+  stroke-width: 10px;
+}
+.cls-2 {
+  stroke: #808285;
+  stroke-width: 4px;
+  display: none;
+}
+
+.shown {
+  display: block;
+}
+
+svg {
+  max-width: 300px;
+}

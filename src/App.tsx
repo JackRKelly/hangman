@@ -1,30 +1,52 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
+import { Figure } from "./Figure";
 
-function App() {
+export const App = () => {
   const [word] = useState("hello world");
   const [guessInput, setGuessInput] = useState("");
-  const [correctGuesses, setCorrectGuesses] = useState<string[]>([
-    "a",
-    "a",
-    "a",
-  ]);
-  const [incorrectGuesses, setIncorrectGuesses] = useState<string[]>([
-    "a",
-    "a",
-    "a",
-  ]);
+  const [correctGuesses, setCorrectGuesses] = useState<string[]>([]);
+  const [incorrectGuesses, setIncorrectGuesses] = useState<string[]>([]);
+
+  const resetGame = () => {
+    setCorrectGuesses([]);
+    setIncorrectGuesses([]);
+  };
 
   const handleGuess = (guess: string) => {
     if (word.includes(guess)) {
-      setCorrectGuesses((old) => [guess, ...old]);
+      setCorrectGuesses((old) => [...old, guess]);
     } else {
-      setIncorrectGuesses((old) => [guess, ...old]);
+      setIncorrectGuesses((old) => [...old, guess]);
     }
   };
 
+  useEffect(() => {
+    if (incorrectGuesses.length === 6) {
+      alert("You lose, resetting game.");
+      resetGame();
+    }
+  }, [word, incorrectGuesses]);
+
+  useEffect(() => {
+    let complete = true;
+    let wordStripped = word.replace(" ", "");
+
+    for (let i = 0; i < wordStripped.length; i++) {
+      if (!correctGuesses.includes(wordStripped.charAt(i))) {
+        complete = false;
+      }
+    }
+
+    if (complete) {
+      alert("You win, resetting game.");
+      resetGame();
+    }
+  }, [word, correctGuesses]);
+
   return (
     <div className="App">
+      <Figure incorrectCount={incorrectGuesses.length} />
       <p className="word">
         {word
           .split("")
@@ -42,25 +64,34 @@ function App() {
           .join(" ")}
       </p>
       <p className="incorrect">
-        {incorrectGuesses.map(
-          (guess, index) => `${index === 0 ? guess : `, ${guess}`}`
-        )}
+        Incorrect:{" "}
+        {incorrectGuesses.length === 0
+          ? "No incorrect guesses."
+          : incorrectGuesses.map(
+              (guess, index) => `${index === 0 ? guess : `, ${guess}`}`
+            )}
       </p>
       <p className="correct">
-        {correctGuesses.map(
-          (guess, index) => `${index === 0 ? guess : `, ${guess}`}`
-        )}
+        Correct:{" "}
+        {correctGuesses.length === 0
+          ? "No correct guesses."
+          : correctGuesses.map(
+              (guess, index) => `${index === 0 ? guess : `, ${guess}`}`
+            )}
       </p>
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          if (
+          if (guessInput.length === 0) {
+            alert("input cannot be empty");
+          } else if (
             correctGuesses.includes(guessInput) ||
             incorrectGuesses.includes(guessInput)
           ) {
             alert("already guessed character.");
           } else {
             handleGuess(guessInput);
+            setGuessInput("");
           }
         }}
       >
@@ -79,6 +110,6 @@ function App() {
       </form>
     </div>
   );
-}
+};
 
 export default App;
