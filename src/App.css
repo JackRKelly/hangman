@@ -5,3 +5,7 @@
 .correct {
   color: green;
 }
+
+.word {
+  white-space: pre;
+}

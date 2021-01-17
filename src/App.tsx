@@ -25,7 +25,22 @@ function App() {
 
   return (
     <div className="App">
-      <p className="word">{word}</p>
+      <p className="word">
+        {word
+          .split("")
+          .map((character) => {
+            if (
+              correctGuesses.includes(character) ||
+              incorrectGuesses.includes(character) ||
+              character === " "
+            ) {
+              return character;
+            } else {
+              return "_";
+            }
+          })
+          .join(" ")}
+      </p>
       <p className="incorrect">
         {incorrectGuesses.map(
           (guess, index) => `${index === 0 ? guess : `, ${guess}`}`
