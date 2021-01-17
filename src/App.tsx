@@ -115,7 +115,7 @@ export const App = () => {
           alert(`The word is: "${word}"`);
         }}
       >
-        Hint
+        Solution
       </button>
     </div>
   );
