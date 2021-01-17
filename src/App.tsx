@@ -109,6 +109,8 @@ export const App = () => {
         />
         <button type="submit">Guess</button>
       </form>
+
+      <p>Hint: word is "hello world"</p>
     </div>
   );
 };
