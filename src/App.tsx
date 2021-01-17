@@ -110,7 +110,13 @@ export const App = () => {
         <button type="submit">Guess</button>
       </form>
 
-      <p>Hint: word is "hello world"</p>
+      <button
+        onClick={() => {
+          alert(`The word is: "${word}"`);
+        }}
+      >
+        Hint
+      </button>
     </div>
   );
 };
