@@ -86,8 +86,8 @@ export const App = () => {
           if (guessInput.length === 0) {
             alert("input cannot be empty");
           } else if (
-            correctGuesses.includes(guessInput) ||
-            incorrectGuesses.includes(guessInput)
+            correctGuesses.includes(guessInput.toLowerCase()) ||
+            incorrectGuesses.includes(guessInput.toLowerCase())
           ) {
             alert("already guessed character.");
             setGuessInput("");
