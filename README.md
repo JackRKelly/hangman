@@ -5,8 +5,8 @@ This is for an interview, by Jack Kelly
 
 To install dependencies, you can run:
 
-### `yarn`
+`yarn`
 
 In the project directory, you can run:
 
-### `yarn start`
+`yarn start`
