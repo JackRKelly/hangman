@@ -14,10 +14,11 @@ export const App = () => {
   };
 
   const handleGuess = (guess: string) => {
-    if (word.includes(guess)) {
-      setCorrectGuesses((old) => [...old, guess]);
+    let lowercaseGuess = guess.toLowerCase();
+    if (word.includes(lowercaseGuess)) {
+      setCorrectGuesses((old) => [...old, lowercaseGuess]);
     } else {
-      setIncorrectGuesses((old) => [...old, guess]);
+      setIncorrectGuesses((old) => [...old, lowercaseGuess]);
     }
   };
 
